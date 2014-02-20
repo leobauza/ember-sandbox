@@ -23,6 +23,7 @@
 					{{#link-to 'about' tagName="li"}}About{{/link-to}}-->
 					<li>{{#link-to 'index' class="navbar-brand"}}Homepage{{/link-to}}</li>
 					<li>{{#link-to 'about'}}About{{/link-to}}</li>
+					<li>{{#link-to 'products'}}Products{{/link-to}}</li>
 				</ul>
 			</div>
 		</div>
@@ -45,6 +46,29 @@
 	<script type='text/x-handlebars' data-template-name='about'>
 		<h1>About The Fire Spirits</h1>
 	</script>
+
+	<script type='text/x-handlebars' data-template-name='products'>
+		<h1>Products</h1>
+		{{#each product in model}}
+			<h2>{{product.title}}</h2>
+		{{/each}}
+		===== or render just with #each ======
+		<ul class="list-unstyled col-md-8">
+		{{#each}}
+			<li class="row">
+				<div class="col-md-5">{{image}}</div>
+				<div class="col-md-7">
+					<h2>{{title}}</h2>
+					<p class="product-description">{{description}}</p>
+					<p><button class="btn btn-success">Buy for ${{price}}</button></p>
+				</div>
+			</li>
+		{{/each}}
+		</ul>
+		
+
+	</script>
+
 	
 	
 </body>
