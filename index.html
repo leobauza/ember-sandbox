@@ -66,7 +66,23 @@
 		{{/each}}
 		</ul>
 		
+		<ul class="list-group col-md-8">
+			{{#each}}
+			{{#link-to 'product' this tagName="li" classNames='list-group-item'}}
+				{{title}}
+				{{description}}
+				{{price}}
+			{{/link-to}}
+			{{/each}}
+		</ul>		
 
+	</script>
+	
+	
+	<script type="text/x-handlebars" data-template-name='product'>
+		<h2>{{title}}</h2>
+		<p>{{description}}</p>
+		<p>Buy for ${{price}}</p>
 	</script>
 
 	
