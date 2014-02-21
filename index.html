@@ -47,7 +47,7 @@
 		<h1>About The Fire Spirits</h1>
 	</script>
 
-	<script type='text/x-handlebars' data-template-name='products'>
+	<script type='text/x-handlebars' data-template-name='oldproducstpl'>
 		<h1>Products</h1>
 		{{#each product in model}}
 			<h2>{{product.title}}</h2>
@@ -78,6 +78,30 @@
 
 	</script>
 	
+	
+	
+	<script type='text/x-handlebars' data-template-name='products'>
+		<h1>Products</h1>
+
+		<section class="row">
+			<aside class="col-sm-3">
+				<div class="list-group">
+					{{#each}}
+						{{#link-to 'product' this classNames='list-group-item'}}
+							{{title}}
+						{{/link-to}}
+					{{/each}}
+				</div>
+			</aside>
+			<article class="col-sm-9">
+				{{outlet}}
+			</article> 
+		</section>
+	</script>
+	
+	<script type="text/x-handlebars" data-template-name='products/index'>
+		<p class="text-muted">Choose a product from those on the left</p>
+	</script>
 	
 	<script type="text/x-handlebars" data-template-name='product'>
 		<h2>{{title}}</h2>

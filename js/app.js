@@ -32,12 +32,17 @@ App.Router.map(function() {
 	//this.route('about', { path: '/aboutus' }); //specify a different path
 
 	//resource route
-	this.resource('products');
+	//this.resource('products');
 	//this.resource('products', {path: '/items'});
 	
 	
 	//dynamic route
-	this.resource('product', { path: '/products/:title' });
+	//this.resource('product', { path: '/products/:title' });
+
+	//nested route for products
+	this.resource('products', function() {
+		this.resource('product', {path: '/:title'});
+	});
 
 });
 
