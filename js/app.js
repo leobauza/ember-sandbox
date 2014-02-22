@@ -1,24 +1,7 @@
 var App = Ember.Application.create({
 	LOG_TRANSITIONS: true //helpful for debugging
 });
-
-//products
-App.PRODUCTS = [
-	{
-		title: 'Flint',
-		price: 99,
-		description: 'Flint is..',
-		isOnSale: true,
-		image: 'flint.png'
-	},
-	{
-		title: 'Kindling',
-		price: 249,
-		description: 'Easily..',
-		isOnSale: false,
-		image: 'kindling.png'
-	}
-];
+App.ApplicationAdapter = DS.FixtureAdapter.extend();
 
 /*
 
@@ -41,10 +24,45 @@ App.Router.map(function() {
 
 	//nested route for products
 	this.resource('products', function() {
-		this.resource('product', {path: '/:title'});
+		this.resource('product', {path: '/:product_id'});
 	});
 
 });
+
+/*
+
+MODELS
+
+*/
+App.Product = DS.Model.extend({
+	title: DS.attr('string'),
+	price: DS.attr('number'),
+	description: DS.attr('string'),
+	isOnSale: DS.attr('boolean'),
+	image: DS.attr('string')
+});
+
+
+//ember data fixetures for Products
+App.Product.FIXTURES = [ //needs to use the FIXTURES constant within the model
+	{
+		id: 1, //need to give each product a unique ID
+		title: 'Flint',
+		price: 99,
+		description: 'Flint is..',
+		isOnSale: true,
+		image: 'flint.png'
+	},
+	{
+		id: 2,
+		title: 'Kindling',
+		price: 249,
+		description: 'Easily..',
+		isOnSale: false,
+		image: 'kindling.png'
+	}
+];
+
 
 
 /*
@@ -72,17 +90,20 @@ ROUTES
 
 App.ProductsRoute = Ember.Route.extend({
 	model: function() {
-		return App.PRODUCTS;
+		//return App.PRODUCTS;
+		return this.store.findAll('product');
 	}
 });
 
-App.ProductRoute = Ember.Route.extend({
-	model: function(params) {
-		//console.log(params)
-		return App.PRODUCTS.findBy('title', params.title);
-	}
-});
 
+//Product Route not needed as this is the ember default behaviour
+// App.ProductRoute = Ember.Route.extend({
+// 	model: function(params) {
+// 		//console.log(params)
+// 		//return App.PRODUCTS.findBy('title', params.title);
+// 		return this.store.find('product', params.product_id);
+// 	}
+// });
 
 
 
