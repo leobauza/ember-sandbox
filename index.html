@@ -24,6 +24,7 @@
 					<li>{{#link-to 'index' class="navbar-brand"}}Homepage{{/link-to}}</li>
 					<li>{{#link-to 'about'}}About{{/link-to}}</li>
 					<li>{{#link-to 'products'}}Products{{/link-to}}</li>
+					<li>{{#link-to 'contacts'}}Contacts{{/link-to}}</li>
 				</ul>
 			</div>
 		</div>
@@ -107,9 +108,53 @@
 		<h2>{{title}}</h2>
 		<p>{{description}}</p>
 		<p>Buy for ${{price}}</p>
+		<h3>Reviews</h3>
+		<ul>
+			{{#each review in reviews}} <!-- or #each reviews (shorter) -->
+				<li>{{review.text}}</li> <!-- or {{text}} is using the shorter way -->
+			{{else}}
+				<li>
+					<p class="text-muted"><em>No reviews yet. Be the first to write one!</em></p>
+				</li>
+			{{/each}}
+		</ul>
 	</script>
 
-	
+
+	<script type="text/x-handlebars" data-template-name='contacts'>
+		<div class="row">
+			<div class="col-sm-9">
+				{{outlet}}
+			</div>
+			<div class="col-sm-3">
+				<div class="list-group">
+					{{#each}}
+						{{#link-to 'contact' this classNames='list-group-item'}}
+							{{name}}
+						{{/link-to}}
+					{{/each}}
+				</div>
+			</div>
+		</div>
+	</script>
+
+	<script type="text/x-handlebars" data-template-name='contacts/index'>
+		<p class="text-muted">Choose a contact from those on the left</p>
+	</script>
+
+
+	<script type="text/x-handlebars" data-template-name='contact'>
+		<div class="row">
+			<div class="col-sm-5">
+			
+			</div>
+			<div class="col-sm-7">
+				<h2>{{name}}</h2>
+				<p>{{about}}</p>
+			</div>
+		</div>
+	</script>
+
 	
 </body>
 </html>
