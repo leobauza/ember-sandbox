@@ -6,7 +6,8 @@
 			"description": "Flint is..",
 			"isOnSale": true,
 			"image": "flint.png",
-			"reviews": [100, 101]
+			"reviews": [100, 101],
+			"crafter": 200
 		},
 		{
 			"id": 2,
@@ -15,7 +16,18 @@
 			"description": "Easily..",
 			"isOnSale": false,
 			"image": "kindling.png",
-			"reviews": []
+			"reviews": [],
+			"crafter": 201
+		},
+		{
+			"id": 3,
+			"title": "Bow Drill",
+			"price": 59.99,
+			"description": "Easily..",
+			"isOnSale": false,
+			"image": "bowdrill.png",
+			"reviews": [],
+			"crafter": 200
 		}
 	],
 	"reviews": [

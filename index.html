@@ -17,12 +17,9 @@
 	<script type='text/x-handlebars' data-template-name='application'>
 		<div class='navbar navbar-default'>
 			<div class='container'>
-				{{#link-to 'index' class="navbar-brand"}}Sample{{/link-to}}
+				{{#link-to 'index' class="navbar-brand"}}Homepage{{/link-to}}
 				<ul class='nav navbar-nav navbar-right'>
-					<!--{{#link-to 'index' tagName="li" class="navbar-brand"}}Homepage{{/link-to}}
-					{{#link-to 'about' tagName="li"}}About{{/link-to}}-->
-					<li>{{#link-to 'index' class="navbar-brand"}}Homepage{{/link-to}}</li>
-					<li>{{#link-to 'about'}}About{{/link-to}}</li>
+
 					<li>{{#link-to 'products'}}Products{{/link-to}}</li>
 					<li>{{#link-to 'contacts'}}Contacts{{/link-to}}</li>
 				</ul>
@@ -42,10 +39,10 @@
 		<h1>Welcome to the Flint &amp; Flame!</h1>
 		<p {{bind-attr data-property='property'}}>There are {{productsCount}} products</p>
 		<p>Rendered on: {{time}}</p>
-	</script>
-
-	<script type='text/x-handlebars' data-template-name='about'>
-		<h1>About The Fire Spirits</h1>
+		{{#link-to 'products' class="btn btn-primary"}}browse all {{productsCount}} items{{/link-to}}
+		<h4>this.get('model').get('length') is equivalent to this.get('length')</h4>
+		<p><strong>thisis one: </strong>{{thisis.one}}</p>
+		<p><strong>thisis two: </strong>{{thisis.two}}</p>
 	</script>
 
 	<script type='text/x-handlebars' data-template-name='oldproducstpl'>
@@ -78,8 +75,6 @@
 		</ul>		
 
 	</script>
-	
-	
 	
 	<script type='text/x-handlebars' data-template-name='products'>
 		<h1>Products</h1>
@@ -118,8 +113,8 @@
 				</li>
 			{{/each}}
 		</ul>
+		<p>Finely crafter by {{#link-to 'contact' crafter}}{{crafter.name}}{{/link-to}}</p>
 	</script>
-
 
 	<script type="text/x-handlebars" data-template-name='contacts'>
 		<div class="row">
@@ -139,18 +134,24 @@
 	</script>
 
 	<script type="text/x-handlebars" data-template-name='contacts/index'>
-		<p class="text-muted">Choose a contact from those on the left</p>
+		<h1>About The Fire Spirits</h1>
+		<p>The fire sprites are firey and spirity</p>
 	</script>
-
 
 	<script type="text/x-handlebars" data-template-name='contact'>
 		<div class="row">
 			<div class="col-sm-5">
-			
+				
 			</div>
 			<div class="col-sm-7">
 				<h2>{{name}}</h2>
 				<p>{{about}}</p>
+				<h3>Products Crafted</h3>
+				<ul>
+				{{#each products}}
+					<li>{{#link-to 'product' this}}{{title}}{{/link-to}}</li>
+				{{/each}}
+				</ul>
 			</div>
 		</div>
 	</script>
