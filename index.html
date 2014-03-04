@@ -40,9 +40,10 @@
 		<p {{bind-attr data-property='property'}}>There are {{productsCount}} products</p>
 		<p>Rendered on: {{time}}</p>
 		{{#link-to 'products' class="btn btn-primary"}}browse all {{productsCount}} items{{/link-to}}
-		<h4>this.get('model').get('length') is equivalent to this.get('length')</h4>
+		<h4>this.get('model').get('length') is equivalent to this.get('length') is equivalent to this.get('model.length')</h4>
 		<p><strong>thisis one: </strong>{{thisis.one}}</p>
 		<p><strong>thisis two: </strong>{{thisis.two}}</p>
+		<p><strong>thisis three: </strong>{{thisis.three}}</p>
 	</script>
 
 	<script type='text/x-handlebars' data-template-name='oldproducstpl'>
@@ -134,8 +135,8 @@
 	</script>
 
 	<script type="text/x-handlebars" data-template-name='contacts/index'>
-		<h1>About The Fire Spirits</h1>
-		<p>The fire sprites are firey and spirity</p>
+		<h1>{{contactName}}</h1>
+		<p>Default landing for contact</p>
 	</script>
 
 	<script type="text/x-handlebars" data-template-name='contact'>

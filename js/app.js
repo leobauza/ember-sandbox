@@ -91,6 +91,12 @@ App.ProductsRoute = Ember.Route.extend({
 // 	}
 // });
 
+App.ContactsIndexRoute = Ember.Route.extend({
+	model: function() {
+		return this.store.find('contact', 200);
+	}
+});
+
 App.ContactsRoute = Ember.Route.extend({
 	model: function() {
 		return this.store.findAll('contact');
@@ -133,7 +139,8 @@ App.IndexController = Ember.ArrayController.extend({
 	thisis: function() {
 		return {
 			one: this.get('model').get('length'),
-			two: this.get('length')
+			two: this.get('length'),
+			three: this.get('model.length')
 		}
 	}.property()
 	
@@ -146,15 +153,18 @@ App.ProductsController = Ember.ArrayController.extend({
 });
 
 
-// App.ContactsIndexController = Ember.Controller.extend({
-// 	contactName: 'Anostagia',
-// 	avatar: 'images/avatar.png',
-// 	open: function() {
-// 		return ((new Date()).getDay() === 0) ? "Closed" : "Open";
-// 	}.property()
-// });
+App.ContactsIndexController = Ember.ObjectController.extend({
+	contactName: Ember.computed.alias('name'),
+	avatar: 'images/avatar.png',
+	open: function() {
+		return ((new Date()).getDay() === 0) ? "Closed" : "Open";
+	}.property()
+});
 
-
+App.ContactsController = Ember.ArrayController.extend({
+	sortProperties: ['name'],
+	sortAscending: false
+});
 
 /*
 
