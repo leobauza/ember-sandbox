@@ -70,6 +70,7 @@ ROUTES
 */
 App.IndexRoute = Ember.Route.extend({
 	model: function() {
+		console.log("the ember route class: ", this);
 		return this.store.findAll('product');
 	}
 });
@@ -77,6 +78,7 @@ App.IndexRoute = Ember.Route.extend({
 
 App.ProductsRoute = Ember.Route.extend({
 	model: function() {
+		console.log("the ember route class: ", this);
 		//return App.PRODUCTS;
 		return this.store.findAll('product');
 		//return this.store.find('product', {order: 'title'}); //this will generate a url like example.com/products?order=title sorting happens server side
@@ -132,11 +134,27 @@ App.IndexController = Ember.ArrayController.extend({
 	
 	//shortened version of the above
 	productsCount: Ember.computed.alias('length'),
+	
+	// onSale: function() {
+	// 	return this.filter(function(product) {
+	// 		return product.get('isOnSale');
+	// 	});
+	// }.property(),
+	
+	//or shorter version:
+	onSale: function() {
+		//filterBy is a method of the ArrayController
+		return this.filterBy('isOnSale', true).slice(0, 3);  //the "this" refers to the model assigned to this in the route above so...product
+		//slice will give us the first three items in the array
+	}.property('@each.isOnSale'), //update this property if the isOnSale attr on any product changes
+	
 	property: 'my-prop',
 	time: function() {
 		return (new Date()).toDateString();
 	}.property(),
 	thisis: function() {
+		console.log("this controller: ", this);
+		console.log("this controller's model: ", this.get('model.type'));
 		return {
 			one: this.get('model').get('length'),
 			two: this.get('length'),
@@ -157,13 +175,19 @@ App.ContactsIndexController = Ember.ObjectController.extend({
 	contactName: Ember.computed.alias('name'),
 	avatar: 'images/avatar.png',
 	open: function() {
+		
 		return ((new Date()).getDay() === 0) ? "Closed" : "Open";
 	}.property()
 });
 
 App.ContactsController = Ember.ArrayController.extend({
 	sortProperties: ['name'],
-	sortAscending: false
+	sortAscending: false,
+	something: function() {
+		console.log("this controller?: ", this);
+		console.log("this controller's model?: ", this.get('model.type'));
+		return "only here to log out controller and model";
+	}.property()
 });
 
 /*
@@ -205,9 +229,28 @@ App.Product.FIXTURES = [ //needs to use the FIXTURES constant within the model
 		title: 'Zebra',
 		price: 20,
 		description: 'Easily..',
-		isOnSale: false,
+		isOnSale: true,
 		image: 'zebra.png',
 		crafter: 200
+	},
+	{
+		id: 5,
+		title: 'Canon',
+		price: 200,
+		description: 'Easily..',
+		isOnSale: false,
+		image: 'canon.png',
+		crafter: 201
+	},
+	{
+		id: 6,
+		title: 'Dragon',
+		price: 2000,
+		description: 'Easily..',
+		isOnSale: true,
+		image: 'dragon.png',
+		reviews: [102, 103],
+		crafter: 201
 	}
 ];
 
@@ -221,6 +264,16 @@ App.Review.FIXTURES = [
 		id: 101,
 		product: 1, //map reviews back to a product!
 		text: "Not the brightest flame, but warm!"
+	},
+	{
+		id: 102,
+		product: 6, //map reviews back to a product!
+		text: "its a flippin dragon!"
+	},
+	{
+		id: 101,
+		product: 6, //map reviews back to a product!
+		text: "dragons..."
 	}
 ];
 
@@ -237,7 +290,7 @@ App.Contact.FIXTURES = [
     name: "Anostagia",
     about: "Knowing there was a need for it, Anostagia drew on her experience and spearheaded the Flint & Flame storefront. In addition to coding the site, she also creates a few products available in the store.",
     avatar: "images/contacts/anostagia.png",
-  	products: [2]
+  	products: [2, 5, 6]
   }
 ];
 

@@ -44,6 +44,9 @@
 		<p><strong>thisis one: </strong>{{thisis.one}}</p>
 		<p><strong>thisis two: </strong>{{thisis.two}}</p>
 		<p><strong>thisis three: </strong>{{thisis.three}}</p>
+		{{#each onSale}}
+			<h4>{{title}}</h4>
+		{{/each}}
 	</script>
 
 	<script type='text/x-handlebars' data-template-name='oldproducstpl'>
@@ -124,6 +127,7 @@
 			</div>
 			<div class="col-sm-3">
 				<div class="list-group">
+					{{something}}
 					{{#each}}
 						{{#link-to 'contact' this classNames='list-group-item'}}
 							{{name}}
@@ -137,6 +141,7 @@
 	<script type="text/x-handlebars" data-template-name='contacts/index'>
 		<h1>{{contactName}}</h1>
 		<p>Default landing for contact</p>
+		{{open}}
 	</script>
 
 	<script type="text/x-handlebars" data-template-name='contact'>
